@@ -15,7 +15,16 @@
 // 4.  If equal is clicked, run a function that performs the operation on the two numbers
 
 
+let inputs = {
+    num1: [],
+    inputNumOne: function(num1) {
+        this.num1.push(num1);
+    },
 
+    num2: [],
+        inputNumTwo: function(num2) {
+        this.num2.push(num2);
+};
 
 
 
