@@ -2,10 +2,9 @@
 // 1.  When a number is clicked:
 //          a. DONE  display number in screen until a non-number button is clicked
 // 2.  When an operator is clicked:
-//          a.  If no number on screen, do nothing
+//          a.  DONE If no number on screen, do nothing
 //          b.  If already saved first number, do nothing
-//          b.  If a number is on screen and haven't already saved first number:
-//                i.  Save number to [something]
+//          c.  DONE If a number is on screen and haven't already saved first number, save first number:
 // 3.   When second number is clicked:
 //          a.  Save operator to [something]
 //          b.  Display number in screen until a non-number button is clicked
@@ -15,25 +14,60 @@
 //          c.  Return result to the screen
 // 5.   DONE If backspace is clicked, remove the last button value from the screen
 // 6.   DONE If "C" is clicked:
-//          a.  reset the screen to 0
-//          b.  remove previously set number 1 and operator, if applicable
+//          a.  DONE reset the screen to 0
+//          b.  DONE remove previously set number 1 and operator, if applicable
 // 7.   Misc.
 //          a.  If the result to be returned to the screen isn't a number, return "error" to screen
 //          b.  DONE  Cap length of number inputs at length of screen
 //          c.  Cap final result at length of screen
 //          d.  DONE  If there are no numbers in the screen, should always have a 0 as default
 
+//NEXT STEPS:
+// 1. Need to redo numbers section to be agnostic to first or second.
+//      a. Need to check if firstNumFinal has a value,
+//      b. then clear screen
+//      c. then run same process to put second number on screen
+//
+//  2. Then need to set up equals button:
+//      a.  Equals saves second number
+//      b.  Need to create function for each operator, which run when checked against the operator value stored
+//      c.  Need to return answer to the screen
+//          i. Unless NaN then return "error"
+//          ii. Or number is two big, in which case need to round to 8 digits
 
 let screen = document.getElementById('screen');
 
-let operatorValue =
+let operatorValue;
+
+let firstNumFinal;
+
+let secondNumFinal;
 
 //Section to handle number buttons
 
-let btn = document.getElementsByClassName('num-button');
+let numBtn = document.getElementsByClassName('num-button');
 
-for (let btns of btn) {
+for (let btns of numBtn) {
     btns.addEventListener('click', firstNum);
+}
+
+//section to handle operator buttons and save first number
+
+let operatorBtn = document.getElementsByClassName('opBtn');
+
+for (let btns of operatorBtn) {
+    btns.addEventListener('click', saveOperator)
+}
+
+function saveOperator(e) {
+    operatorValue = e.target.innerHTML;
+    if (firstNumber.length > 0) {
+        firstNumFinal = firstNumber.join('');
+    } else {
+        firstNumFinal = 0;
+    }
+    console.log(firstNumFinal);
+    console.log(operatorValue);
 }
 
 //Section to handle numbers
