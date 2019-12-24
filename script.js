@@ -1,40 +1,74 @@
 //Requirements
-// 1.  Display value of buttons clicked in the screen:
-//          a. display in screen each number clicked before operator is clicked
-//          b. upon clicking operator:
-//              store first number
-//          c. upon clicking another number
-//              store operator
-//              display second number(s) on screen
-//          d. upon clicking equals
-//              return result
-// 2.  If "C" is clicked:
-//         reset the screen to 0
-//         remove previously set number 1 and operator, if applicable
-// 3.  If backspace is clicked, remove the last button value from the screen
-// 4.  If equal is clicked, run a function that performs the operation on the two numbers
+// 1.  When a number is clicked:
+//          a. DONE  display number in screen until a non-number button is clicked
+// 2.  When an operator is clicked:
+//          a.  If no number on screen, do nothing
+//          b.  If already saved first number, do nothing
+//          b.  If a number is on screen and haven't already saved first number:
+//                i.  Save number to [something]
+// 3.   When second number is clicked:
+//          a.  Save operator to [something]
+//          b.  Display number in screen until a non-number button is clicked
+// 4.   When equal is clicked, run a function that performs the operation on the two numbers
+//          a.  Save second number
+//          b.  Run a function that performs the operation on the two numbers
+//          c.  Return result to the screen
+// 5.   DONE If backspace is clicked, remove the last button value from the screen
+// 6.   DONE If "C" is clicked:
+//          a.  reset the screen to 0
+//          b.  remove previously set number 1 and operator, if applicable
+// 7.   Misc.
+//          a.  If the result to be returned to the screen isn't a number, return "error" to screen
+//          b.  DONE  Cap length of number inputs at length of screen
+//          c.  Cap final result at length of screen
+//          d.  DONE  If there are no numbers in the screen, should always have a 0 as default
 
 
-let inputs = {
-    num1: [],
-    inputNumOne: function(num1) {
-        this.num1.push(num1);
-    },
+let screen = document.getElementById('screen');
 
-    num2: [],
-        inputNumTwo: function(num2) {
-        this.num2.push(num2);
-};
+let operatorValue =
 
+//Section to handle number buttons
 
+let btn = document.getElementsByClassName('num-button');
 
+for (let btns of btn) {
+    btns.addEventListener('click', firstNum);
+}
 
-let eventHandlers = {
-    setupEventListeners: function() {
-        let buttons = document.getElementsByClassName('button-row');
-        buttons.addEventListener('click', function(e)) {
-            let buttonClicked = e.target;
+//Section to handle numbers
 
-        }
+let firstNumber = [];
+
+function firstNum(e) {
+    if (firstNumber.length < 8) {
+        firstNumber.push(e.target.innerHTML);
+        screen.innerHTML = firstNumber.join('');
     }
+}
+
+//  Section to handle backspace button
+
+let backSpace = document.getElementById('backspace');
+
+backSpace.addEventListener('click', removeOne)
+
+function removeOne() {
+    firstNumber.pop();
+    if (firstNumber.length > 0) {
+        screen.innerHTML = firstNumber.join('');
+    } else {
+        screen.innerHTML = 0;
+    }
+}
+
+// Section to handle clear button
+
+let clear = document.getElementById('clear');
+
+clear.addEventListener('click', clearAll);
+
+function clearAll() {
+    screen.innerHTML = 0;
+    firstNumber = [];
 }
