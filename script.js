@@ -1,5 +1,5 @@
 //Requirements
-// 1.  When a number is clicked:
+// 1.  DONE When a number is clicked:
 //          a. DONE  display number in screen until a non-number button is clicked
 // 2.  When an operator is clicked:
 //          a.  DONE If no number on screen, do nothing
@@ -23,17 +23,13 @@
 //          d.  DONE  If there are no numbers in the screen, should always have a 0 as default
 
 //NEXT STEPS:
-// 1. Need to redo numbers section to be agnostic to first or second.
-//      a. Need to check if firstNumFinal has a value,
-//      b. then clear screen
-//      c. then run same process to put second number on screen
-//
-//  2. Then need to set up equals button:
+
+//  1. Need need to set up equals button:
 //      a.  Equals saves second number
 //      b.  Need to create function for each operator, which run when checked against the operator value stored
 //      c.  Need to return answer to the screen
 //          i. Unless NaN then return "error"
-//          ii. Or number is two big, in which case need to round to 8 digits
+//          ii. Or number is too big, in which case need to round to 8 digits
 
 let screen = document.getElementById('screen');
 
@@ -66,18 +62,36 @@ function saveOperator(e) {
     } else {
         firstNumFinal = 0;
     }
-    console.log(firstNumFinal);
-    console.log(operatorValue);
+    for (let btns of numBtn) {
+    btns.addEventListener('click', secondNum);
+}
+    for (let btns of operatorBtn) {
+        btns.removeEventListener('click', saveOperator);
+    }
+    for (let btns of numBtn) {
+        btns.removeEventListener('click', firstNum);
+    }
+            console.log(firstNumFinal);
+            console.log(operatorValue);
 }
 
 //Section to handle numbers
 
 let firstNumber = [];
 
+let secondNumber = [];
+
 function firstNum(e) {
     if (firstNumber.length < 8) {
         firstNumber.push(e.target.innerHTML);
         screen.innerHTML = firstNumber.join('');
+    }
+}
+function secondNum(e) {
+    screen.innerHTML = 0;
+    if (secondNumber.length < 8) {
+        secondNumber.push(e.target.innerHTML);
+        screen.innerHTML = secondNumber.join('');
     }
 }
 
@@ -106,3 +120,33 @@ function clearAll() {
     screen.innerHTML = 0;
     firstNumber = [];
 }
+
+//section to handle equals button
+
+let equalsButton = document.getElementById('equals');
+
+equalsButton.addEventListener('click', runCalc);
+
+function runCalc() {
+    if (secondNumber.length > 0) {
+        secondNumFinal = secondNumber.join('');
+    } else {
+        secondNumFinal = 0;
+    }
+    console.log(secondNumFinal);
+
+    if (operatorValue === 'x') {
+        screen.innerHTML = firstNumFinal * secondNumFinal;
+    } else {
+        if (operatorValue === '/') {
+            screen.innerHTML = firstNumFinal / secondNumFinal;
+        } else {
+            if (operatorValue === '-') {
+                screen.innerHTML = firstNumFinal - secondNumFinal;
+            } else {
+                if (operatorValue === '+') {
+                    screen.innerHTML = firstNumFinal + secondNumFinal;
+                }
+            }
+        }
+    }
