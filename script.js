@@ -2,12 +2,6 @@
 
 let screen = document.getElementById('screen');
 
-let operatorValue;
-
-let firstNumFinal;
-
-let secondNumFinal;
-
 //Section to handle number buttons
 
 let numBtn = document.getElementsByClassName('num-button');
@@ -31,14 +25,16 @@ function saveOperator(e) {
     } else {
         firstNumFinal = 0;
     }
-    for (let btns of numBtn) {
-        btns.addEventListener('click', secondNum);
+    operatorColor = e.target.style.backgroundColor = 'black'
+
+     for (let btns of numBtn) {
+        btns.removeEventListener('click', firstNum);
     }
-    for (let btns of operatorBtn) {
+     for (let btns of operatorBtn) {
         btns.removeEventListener('click', saveOperator);
     }
-    for (let btns of numBtn) {
-        btns.removeEventListener('click', firstNum);
+     for (let btns of numBtn) {
+        btns.addEventListener('click', secondNum);
     }
 }
 
@@ -52,6 +48,8 @@ function firstNum(e) {
     if (firstNumberArray.length < 8) {
         firstNumberArray.push(e.target.innerHTML);
         screen.innerHTML = firstNumberArray.join('');
+        console.log('first function');
+        console.log('FirstArray:',firstNumberArray);
     }
 }
 function secondNum(e) {
@@ -59,6 +57,8 @@ function secondNum(e) {
     if (secondNumberArray.length < 8) {
         secondNumberArray.push(e.target.innerHTML);
         screen.innerHTML = secondNumberArray.join('');
+        console.log('second function');
+        console.log('SecondArray:',secondNumberArray);
     }
 }
 
@@ -84,17 +84,21 @@ let clear = document.getElementById('clear');
 clear.addEventListener('click', clearAll);
 
 function clearAll() {
-    debugger;
     screen.innerHTML = 0;
     firstNumberArray = [];
     secondNumberArray = [];
-    firstNumFinal;
-    operatorValue;
+    firstNumFinal = '';
+    operatorValue = '';
+
     for (let btns of numBtn) {
         btns.addEventListener('click', firstNum);
     }
     for (let btns of numBtn) {
         btns.removeEventListener('click', secondNum);
+    }
+    for (let btns of operatorBtn) {
+        btns.addEventListener('click', saveOperator);
+        btns.style.backgroundColor = 'orange';
     }
 }
 
@@ -103,6 +107,8 @@ function clearAll() {
 let equalsButton = document.getElementById('equals');
 
 equalsButton.addEventListener('click', runCalc);
+
+let finalValue;
 
 function runCalc() {
 
@@ -117,17 +123,31 @@ function runCalc() {
     }
 
     if (operatorValue === 'x') {
-       finalValue = screen.innerHTML = firstNumFinal * secondNumFinal;
+       finalValue = firstNumFinal * secondNumFinal;
+       screen.innerHTML = finalValue;
     } else if (operatorValue === '/') {
-           let finalValue = screen.innerHTML = firstNumFinal / secondNumFinal;
+           let finalValue = firstNumFinal / secondNumFinal;
+           screen.innerHTML = finalValue;
         } else if (operatorValue === '-') {
                let finalValue = screen.innerHTML = firstNumFinal - secondNumFinal;
             } else if (operatorValue === '+') {
-                   let finalValue = screen.innerHTML = firstNumFinal + secondNumFinal;
+                   let finalValue = screen.innerHTML = parseInt(firstNumFinal) + parseInt(secondNumFinal);
                 }
-    firstNumberArray = finalValue.split('');
+    // firstNumberArray = finalValue.split('');
+    firstNumberArray = [];
     secondNumberArray = [];
-    secondNumFinal;
-    operatorValue;
-    firstNumFinal;
+    secondNumFinal = '';
+    operatorValue = '';
+    firstNumFinal = '';
+
+    for (let btns of numBtn) {
+        btns.addEventListener('click', firstNum);
+    }
+    for (let btns of numBtn) {
+        btns.removeEventListener('click', secondNum);
+    }
+    for (let btns of operatorBtn) {
+        btns.addEventListener('click', saveOperator);
+        btns.style.backgroundColor = 'orange';
+    }
             }
