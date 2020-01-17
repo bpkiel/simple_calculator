@@ -1,4 +1,5 @@
-// import { resetButtonsAfterCalc, resetButtonsAfterOperator, resetButtonsAfterClear} from './resets';
+
+import {resetButtonsAfterCalc, resetButtonsAfterOperator, resetButtonsAfterClear} from './resets.js';
 
 let screen = document.getElementById('js-screen');
 let numBtn = document.getElementsByClassName('js-num-button');
@@ -6,6 +7,9 @@ let operatorBtn = document.getElementsByClassName('js-operator-btn');
 let backSpace = document.getElementById('js-backspace-btn');
 let clear = document.getElementById('js-clear-btn');
 let equalsButton = document.getElementById('js-equals-btn');
+let firstNumFinal = '';
+let operatorValue = '';
+let operatorColor = '';
 
 backSpace.addEventListener('click', backspace);
 clear.addEventListener('click', clearAll);
@@ -64,7 +68,6 @@ function clearAll() {
     firstNumberArray = [];
     secondNumberArray = [];
     firstNumFinal = '';
-    operatorValue = '';
     resetButtonsAfterClear()
 }
 
@@ -104,37 +107,38 @@ function runCalc() {
     resetButtonsAfterCalc();
 }
 
-function resetButtonsAfterClear() {
-    for (let btns of numBtn) {
-        btns.addEventListener('click', firstNum);
-    }
-    for (let btns of numBtn) {
-        btns.removeEventListener('click', secondNum);
-    }
-    for (let btns of operatorBtn) {
-        btns.addEventListener('click', saveOperator);
-        btns.style.backgroundColor = 'orange';
-    }
-}
+// function resetButtonsAfterClear() {
+//     for (let btns of numBtn) {
+//         btns.addEventListener('click', firstNum);
+//     }
+//     for (let btns of numBtn) {
+//         btns.removeEventListener('click', secondNum);
+//     }
+//     for (let btns of operatorBtn) {
+//         btns.addEventListener('click', saveOperator);
+//         btns.style.backgroundColor = 'orange';
+//     }
+// }
+//
+// function resetButtonsAfterOperator() {
+//      for (let btns of numBtn) {
+//         btns.removeEventListener('click', firstNum);
+//      }
+//      for (let btns of numBtn) {
+//          btns.addEventListener('click', secondNum);
+//      }
+// }
+//
+// function resetButtonsAfterCalc() {
+//     for (let btns of numBtn) {
+//         btns.removeEventListener('click', firstNum);
+//     }
+//     for (let btns of numBtn) {
+//         btns.addEventListener('click', secondNum);
+//     }
+//     for (let btns of operatorBtn) {
+//         btns.addEventListener('click', saveOperator);
+//         btns.style.backgroundColor = 'orange';
+//     }
+// }
 
-function resetButtonsAfterOperator() {
-     for (let btns of numBtn) {
-        btns.removeEventListener('click', firstNum);
-     }
-     for (let btns of numBtn) {
-         btns.addEventListener('click', secondNum);
-     }
-}
-
-function resetButtonsAfterCalc() {
-    for (let btns of numBtn) {
-        btns.removeEventListener('click', firstNum);
-    }
-    for (let btns of numBtn) {
-        btns.addEventListener('click', secondNum);
-    }
-    for (let btns of operatorBtn) {
-        btns.addEventListener('click', saveOperator);
-        btns.style.backgroundColor = 'orange';
-    }
-}

@@ -35,4 +35,4 @@ function resetButtonsAfterCalc() {
     }
 }
 
-export { resetButtonsAfterOperator, resetButtonsAfterClear, resetButtonsAfterCalc };
+export {resetButtonsAfterOperator, resetButtonsAfterClear, resetButtonsAfterCalc};
