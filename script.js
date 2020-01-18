@@ -1,9 +1,9 @@
 
-import {resetButtonsAfterCalc, resetButtonsAfterOperator, resetButtonsAfterClear} from './resets.js';
+// import {resetButtonsAfterCalc, resetButtonsAfterOperator, resetButtonsAfterClear} from './resets.js';
 
 let screen = document.getElementById('js-screen');
-let numBtn = document.getElementsByClassName('js-num-button');
-let operatorBtn = document.getElementsByClassName('js-operator-btn');
+let numBtns = document.getElementsByClassName('js-num-button');
+let operatorBtns = document.getElementsByClassName('js-operator-btn');
 let backSpace = document.getElementById('js-backspace-btn');
 let clear = document.getElementById('js-clear-btn');
 let equalsButton = document.getElementById('js-equals-btn');
@@ -14,10 +14,10 @@ let operatorColor = '';
 backSpace.addEventListener('click', backspace);
 clear.addEventListener('click', clearAll);
 equalsButton.addEventListener('click', runCalc);
-for (let btns of numBtn) {
+for (let btns of numBtns) {
     btns.addEventListener('click', firstNum);
 }
-for (let btns of operatorBtn) {
+for (let btns of operatorBtns) {
     btns.addEventListener('click', saveOperator)
 }
 
@@ -51,10 +51,14 @@ function saveOperator(e) {
         firstNumFinal = 0;
     }
     operatorColor = e.target.style.backgroundColor = 'darkOrange';
-    resetButtonsAfterOperator();
+    // resetButtonsAfterOperator();
+    resetButtonsAfter ('operator');
 }
 
+
 function backspace() {
+    //todo make this work for second num
+
     firstNumberArray.pop();
     if (firstNumberArray.length > 0) {
         screen.innerHTML = firstNumberArray.join('');
@@ -68,7 +72,8 @@ function clearAll() {
     firstNumberArray = [];
     secondNumberArray = [];
     firstNumFinal = '';
-    resetButtonsAfterClear()
+    // resetButtonsAfterClear();
+    resetButtonsAfter ('clear');
 }
 
 function runCalc() {
@@ -104,39 +109,69 @@ function runCalc() {
     firstNumberArray = finalValue.toString().split('');
     secondNumberArray = [];
     secondNumFinal = '';
-    resetButtonsAfterCalc();
+    // resetButtonsAfterCalc();
+    resetButtonsAfter('equals');
+}
+
+function resetButtonsAfter (button) {
+  if (button === 'clear') {
+      for (let btns of numBtns) {
+        btns.addEventListener('click', firstNum);
+        btns.removeEventListener('click', secondNum);
+    }
+    for (let btns of operatorBtns) {
+        btns.addEventListener('click', saveOperator);
+        btns.style.backgroundColor = 'orange';
+    }
+  }
+  if (button === 'operator') {
+      for (let btns of numBtns) {
+        btns.removeEventListener('click', firstNum);
+        btns.addEventListener('click', secondNum);
+     }
+  }
+  if (button === 'equals') {
+    for (let btns of numBtns) {
+        btns.removeEventListener('click', firstNum);
+        btns.addEventListener('click', secondNum);
+    }
+    for (let btns of operatorBtns) {
+        btns.addEventListener('click', saveOperator);
+        btns.style.backgroundColor = 'orange';
+    }
+  }
 }
 
 // function resetButtonsAfterClear() {
-//     for (let btns of numBtn) {
+//     for (let btns of numBtns) {
 //         btns.addEventListener('click', firstNum);
 //     }
-//     for (let btns of numBtn) {
+//     for (let btns of numBtns) {
 //         btns.removeEventListener('click', secondNum);
 //     }
-//     for (let btns of operatorBtn) {
+//     for (let btns of operatorBtns) {
 //         btns.addEventListener('click', saveOperator);
 //         btns.style.backgroundColor = 'orange';
 //     }
 // }
 //
 // function resetButtonsAfterOperator() {
-//      for (let btns of numBtn) {
+//      for (let btns of numBtns) {
 //         btns.removeEventListener('click', firstNum);
 //      }
-//      for (let btns of numBtn) {
+//      for (let btns of numBtns) {
 //          btns.addEventListener('click', secondNum);
 //      }
 // }
 //
 // function resetButtonsAfterCalc() {
-//     for (let btns of numBtn) {
+//     for (let btns of numBtns) {
 //         btns.removeEventListener('click', firstNum);
 //     }
-//     for (let btns of numBtn) {
+//     for (let btns of numBtns) {
 //         btns.addEventListener('click', secondNum);
 //     }
-//     for (let btns of operatorBtn) {
+//     for (let btns of operatorBtns) {
 //         btns.addEventListener('click', saveOperator);
 //         btns.style.backgroundColor = 'orange';
 //     }
