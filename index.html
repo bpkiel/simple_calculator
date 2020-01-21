@@ -5,42 +5,42 @@
     <title>Simple Calculator</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <script defer src="script.js" type="module"></script>
-    <script defer src="resets.js" type="module"></script>
 </head>
-<body>
 
-<h1>Simple Calculator</h1>
+<body class="calculator">
 
-<div class="calculator">
-    <div class="button-row-0" id="js-screen">
+<h1 class="calculator__main-heading">Simple Calculator</h1>
+
+<div class="calculator__main">
+    <div class="calculator__screen" id="js-screen">
         0
     </div>
-    <div class="button-row-1">
-        <button class="button button-clear" id="js-clear-btn">C</button>
-        <button class="button button-backspace" id="js-backspace-btn">←</button>
-        <button class="button button-divide js-operator-btn">/</button>
+    <div class="calculator__button-row">
+        <button class="calculator__button clear" id="js-clear-btn">C</button>
+        <button class="calculator__button" id="js-backspace-btn">←</button>
+        <button class="calculator__button js-operator-btn">/</button>
     </div>
-    <div class="button-row-2">
-        <button class="button row-2-button js-num-button">7</button>
-        <button class="button row-2-button js-num-button">8</button>
-        <button class="button row-2-button js-num-button">9</button>
-        <button class="button row-2-button js-operator-btn">x</button>
+    <div class="calculator__button-row">
+        <button class="calculator__button js-num-button">7</button>
+        <button class="calculator__button js-num-button">8</button>
+        <button class="calculator__button js-num-button">9</button>
+        <button class="calculator__button js-operator-btn">x</button>
     </div>
-    <div class="button-row-3">
-        <button class="button row-3-button js-num-button">4</button>
-        <button class="button row-3-button js-num-button">5</button>
-        <button class="button row-3-button js-num-button">6</button>
-        <button class="button row-3-button js-operator-btn">-</button>
+    <div class="calculator__button-row">
+        <button class="calculator__button js-num-button">4</button>
+        <button class="calculator__button js-num-button">5</button>
+        <button class="calculator__button js-num-button">6</button>
+        <button class="calculator__button js-operator-btn">-</button>
     </div>
-    <div class="button-row-4">
-        <button class="button row-4-button js-num-button">1</button>
-        <button class="button row-4-button js-num-button">2</button>
-        <button class="button row-4-button js-num-button">3</button>
-        <button class="button row-4-button js-operator-btn">+</button>
+    <div class="calculator__button-row">
+        <button class="calculator__button js-num-button">1</button>
+        <button class="calculator__button js-num-button">2</button>
+        <button class="calculator__button js-num-button">3</button>
+        <button class="calculator__button js-operator-btn">+</button>
     </div>
-    <div class="button-row-5">
-        <button class="button button-0 js-num-button">0</button>
-        <button class="button button-equals" id="js-equals-btn">=</button>
+    <div class="calculator__button-row">
+        <button class="calculator__button button-0 js-num-button">0</button>
+        <button class="calculator__button" id="js-equals-btn">=</button>
     </div>
 </div>
 
